@@ -1,0 +1,12 @@
+1º Envia o comando "HCI_Inquiry" para que o BT entre em Inquiry Mode. Este modo é usado para descobrir os dispositivos vizinhos.
+
+Quando começa a fazer inq, o BT envia ao host uum "Command Status event".
+Quando termina a inq, envia "Inquiry Complete event"
+
+O evento "Inquiry complete" leva nos parametros o sum´ário dos resultados do processo, incluindo o nº de respostas obtidas pelos dispositivos bluetooth próximos. Quando o dispositivo BT responde a uma mensagem Inquiry, é lançado o evento Inquiry Result.
+
+Sempre que o dispositivo responda, a resposta é reportada ao host como um "Inquiry Result event" se o dispositivo não reportou antes durante o periodo de inquisição ou o dispositivo não foi filtrado utilizando o comando: "Set event filter"
+
+
+
+Para calcular a atenuação soma 35 ao RSSI...   

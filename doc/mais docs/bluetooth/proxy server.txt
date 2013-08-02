@@ -1,0 +1,17 @@
+
+dnascimento
+
+tagus.inesc-id.pt
+
+ssh
+imap
+http
+
+
+ ssh -fND localhost:9999 dnascimento@tagus.inesc-id.pt
+
+
+No mac osX:
+
+ssh -D 8080 -f -C -q -N dnascimento@tagus.inesc-id.pt
+

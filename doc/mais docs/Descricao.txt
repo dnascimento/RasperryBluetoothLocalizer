@@ -1,0 +1,22 @@
+Descrição do projecto
+
+
+Isto é uma applet que corre num servidor JBOSS. O servlet arranca na classe:
+
+ist.mit.roomACL.server.MITControlerServiceImpl
+
+Aqui é instânciado o "ControlServer".
+
+O controlServer tem:
+
+- domoticList  - Lista dos objectos a controlar
+- A lista dos MAC address dos sensores para não haver colisão de endereços
+
+Por fim, inicia numa nova thread o "RPCServer".
+
+
+O RPCServer é invocado pelos sensores para enviar os dados que receberem... Sempre que recebe o dado, ele invoca o sendData_2 com uma string que tem de ser "parsada"...
+Depois cria uma thread e o pedido é tratado em newData...
+
+
+

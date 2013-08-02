@@ -1,0 +1,79 @@
+minicom 
+
+https://github.com/cnm/mia_vita
+
+user: root
+pass: cnm
+
+ssh 192.168.0.124
+
+
+
+http://www.embeddedarm.com/documentation/ts-752-schematic.pdf
+
+Acedemos ao dio 21 e ao dio 25 
+
+
+http://www.embeddedarm.com/documentation/ts-7500-schematic.pdf
+
+44 pin dio header (conector de IDE da placa)
+
+
+Acertar os 5 volts e terra do cabo que liga aos IV com os connectos
+
+
+
+
+
+
+dio samples para ler as entradas
+
+./dio set 25 0
+./dio get 21 0
+
+
+
+tese_builder
+
+spot_pulgins descoberta de serviços
+
+spot_plugins /config/spotter.cfg
+
+
+-blue:
+pwd bt_script.sh  
+
+
+
+cartoes B, 7 e 9 têm os programas
+
+
+
+
+
+
+
+
+
+
+
+/tese_build/registry_daemon & 
+config_daemon
+./spotter   3 ficheiros de configuração opcionais
+
+spotter_handler -> ip Certo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
