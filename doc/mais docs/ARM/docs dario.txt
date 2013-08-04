@@ -1,0 +1,305 @@
+####################### GIT ##################
+git commit -m "comment"
+git add *
+git push <remotename> <branchname> 
+git push dario master
+
+
+####################### ATALHOS COMANDOS ##################
+alias cd="pushd . > /dev/null; cd"
+alias pop="popd"
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/arm-unknown-linux-gnu/bin/
+
+#########################  HOW TO START (clean ubuntu 12.02)#########################
+
+sudo apt-get install minicom
+sudo minicom -s 
+
+* Set in Serial Port Setup
+
+  * Serial Device: /dev/ttyUSB0 (or /dev/ttyUSB1)
+
+  * Bps: 115200 8N1
+
+  * Hardware Flow Control: No
+
+
+
+#### ACESSO SERIAL MAC OS X ########
+screen /dev/tty.usbserial 115200        
+
+### para aceder ao router cisco é 9600
+
+*****************************************************************
+#mover o crosscompile para a /usr/local
+
+#yacc:
+sudo apt-get install bison
+
+#lex
+sudo apt-get install flex
+
+#ruby
+sudo apt-get install ruby
+
+#cmake
+sudo apt-get install cmake
+
+
+
+#instalar o yajl
+wget http://github.com/lloyd/yajl/tarball/2.0.1
+
+
+untar
+
+./configure && make install
+
+#adaptar isto para o crosscompiler:
+
+nano configure
+prefix = "/usr/local"    para a:   prefix = "/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu"
+
+
+
+##ATENÇÃO!!!!! O CROSSCOMPILER GUARDA AS LIBS EM /usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu
+
+
+
+******************************
+Alterar as makefiles TODAS para o arm gcc
+
+
+#compilar a cena do fred com o crosscompile
+
+copiar o include para o include do project e o mesmo com a lib fred.so para a lib do projecto
+
+
+
+#yajl NO ARM!!!!!  Têm de compilar no arm e copiar os ficheiros para o PC de volta para o crosscompiler
+git clone git://github.com/lloyd/yajl
+
+e compilar com compilador no arm
+http://blog.beuc.net/posts/Cross-compiling_with_CMake/
+
+
+
+############# BLUETOOTH ###########
+Instalar no ARM
+bluez-utils-3.36.tar.gz
+
+
+as libs a utilizar são: bluez, libbluetooth-dev e  libbluetooth3
+
+
+
+
+
+bluez-libs-3.36.tar.gz
+http://backports.mithril-linux.org/pool/main/b/bluez/libbluetooth3_4.66-3~bpo50+1_arm.deb
+http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
+
+
+depois, ir à página e usar o script:
+---> O MAC do bluetooth é obtido por:
+hciconfig hci0 version
+
+
+#######################
+  # BEGIN SCRIPT        #
+  #######################
+  depmod
+  modprobe ohci-hcd    # open HCI
+  #modprobe uhci-hcd   # Intels HCI universal uses the PCI
+
+  modprobe bluetooth   # load Bluez stack
+  modprobe hci_usb     # load USB device handlers
+   
+  /etc/init.d/bluetooth restart   # startup hci0 bluetooth network device
+  hciconfig  hci0 up
+  modprobe rfcomm 
+
+  mknod -m 666 /dev/rfcomm0 c 216 0 
+  mknod -m 666 /dev/rfcomm1 c 216 1 
+  rfcomm bind 0 <Bluetooth device MAC address>  # serial BT connection  
+  #######################
+  # END SCRIPT          #
+  #######################
+
+
+
+
+http://www.linuxquestions.org/questions/linux-software-2/cross-compiling-bluez-utils-for-arm-599530/
+
+
+
+./configure --host=arm-unknown-linux-gnu --libdir=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/lib --includedir=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/include/ --with-bluez=/cross/bluez-libs-3.36 LDFLAGS=-L"/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/lib"
+
+
+
+############### SSL em crosscompiler#############################
+INSTALLTOP=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/ 
+OPENSSLDIR=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/ 
+CC=arm-unknown-linux-gnu-gcc
+AR=arm-unknown-linux-gnu-ar $(ARFLAGS) r
+RANLIB=arm-unknown-linux-gnu-ranlib
+
+
+
+
+
+export cross=arm-unknown-linux-gnu-
+
+--openssldir
+./config --prefix=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/  --openssldir=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/lib/ -embedded arm  arm-unknown-linux-gnu-gcc
+make CC="${cross}gcc" AR="${cross}ar r" RANLIB="${cross}ranlib"
+
+
+export RANLIB=arm-unknown-linux-gnu-ranlib
+
+É preciso instalar o SSH/TLS library: Openssl:
+http://www.crosscompile.org/static/pages/OpenSSL.html    ---> Editar a Makefile.org
+http://82.157.70.109/mirrorbooks/linuxsystems/belinuxsys-CHP-10-SECT-4.html
+http://crosscompile.googlecode.com/files/arm-openssl-0.9.8g-tar.gz
+apt-get install libssl-dev
+sudo apt-get install libssl0.9.8
+sudo ln -s /usr/lib/i386-linux-gnu/libssl.so**.1.0.0** /usr/lib/libssl.so.0.9.8
+
+
+D-Bus library
+sudo apt-get install libdbus-1-dev libdbus-glib-1-dev
+http://dbus.freedesktop.org/releases/dbus/dbus-1.4.20.tar.gz  -> crosscompile:  
+
+
+./configure --host=arm-unknown-linux-gnu --libdir=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/lib --includedir=/usr/local/arm-unknown-linux-gnu/arm-unknown-linux-gnu/include/  --prefix=/usr/local/arm-unknown-linux-gnu/ -target=arm-unknown-linux-gnu --enable-abstract-sockets
+
+
+## se ele pedir o expat
+http://crosscompile.googlecode.com/files/arm-expat-2.0.1-tar.gz
+
+
+
+
+##livros:
+http://www.embeddedarm.com/about/resource.php?item=410#crosstool
+
+##apoios:
+
+O programa usa bibliotecas estáticas de C:
+http://www.adp-gmbh.ch/cpp/gcc/create_lib.html
+
+
+http://www.bluez.org/
+
+
+#############################################################################################################################################
+#################### 		 		 		 					Tese do fred   										#########################
+#############################################################################################################################################
+Platform for sensor networks, which is capable of synchronizing and aggregating packets sent by other applications. It has user and kernel code.
+
+=========================
+1º ter o crosscompiler etc tudo a funcionar,
+2º configurar correctamente o Makefile.inc ---> compilador e directorio
+3º fazer o make de tudo mas não instalar (ver abaixo)
+4º Enviar para o arm
+5º instalar o yacc no arm:   apt-get install bison flex
+6º Make install como dirá abaixo;
+
+
+Steps to compile this lib
+=========================
+1. make
+2. make install
+
+Compilling local registry daemon
+================================
+1. cd localregistry/daemon
+2. make exec
+(If you want to install it)
+3. make install
+
+Compilling local registry shell command
+=======================================
+1. make install
+2. cd localregistry/shell
+3. make
+
+(If you want to install it)
+4. make install
+
+Compilling kernel modules
+=========================
+1. cd kernel
+2. sh compile.sh
+
+
+
+#### Arrancar com isto ########
+Existem 3 daemons na tese do fred:
+registry_daemon
+./register R 5313 /handler/handler
+./register R 2121 192.168.1.103 2000
+
+
+
+
+
+#############################################################################################################################################
+#################### 		 		 		 		FAQ:	Correndo o programa										#########################
+#############################################################################################################################################
+
+problema: ./spotter: error while loading shared libraries: libfred.so: cannot open shared object file: No such file or directory
+solução:  export LD_LIBRARY_PATH=/home/include/:/home/lib/:/home/includefred/ 
+
+problema: /home/src/spotter/libbt_sensor.so.1.0.1: cannot open shared object file: No such file or directory
+solução: make plugins
+
+
+problema: [ERROR]  handler.c:101 in setup_unicast: Cannot create socket for handler. Unnable to bind socket. Error: Cannot assign requested address
+solução: ver o endereço ip do handler: sax_parser.l:37 in yylex: ATTR_VALUE = |172.20.41.116|   -> ALTERAR NO ficheiro _handler.cfg correspondente192.
+
+problema:Scanning ... 
+		Inquiry failed: Connection timed out
+
+solução: hciconfig hci0 reset
+
+problema: Welcome to the inquisition on device 0
+Periodic inquiry requested: Invalid argument
+Can't Start Periodic mode.: Invalid argument
+
+
+solução:  hciconfig hci0 resetr
+
+###################determinar o IP do ARM: ##################
+
+nmap -sP 172.20.70.0/24
+
+
+E depois, como o mac dos arm tem 69:
+
+arp -a | grep 69
+
+
+
+
+###### TABELA MAC das eth  -    MAC   ########
+
+00:d0:69:42:6b:bd       MV 27				    3    172.20.70.84    - TV
+00:d0:69:43:3f:bb		MV57		 	00:02:72:AF:00:81       2    172.20.70.192  - Quadro
+
+
+00:d0:69:43:3f:b9       MV58            00:15:83:52:42:92       1    172.20.70.53  - PORTA
+
+
+
+
+###### TABELA MAC dos bluetooth -    MAC   ########
+
+
+http://www.gentoo.org/doc/en/bluetooth-guide.xml
+
+						
+
+
+

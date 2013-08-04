@@ -1,9 +1,0 @@
-./configure --host=arm-unknown-linux-gnu --libdir=/usr/local/arm-oabi-toolchain/arm-unknown-linux-gnu/lib --includedir=/usr/local/arm-oabi-toolchain/arm-unknown-linux-gnu/include/ CC=arm-linux-gcc CPP=arm-linux-cpp AR=arm-linux-ar as=/usr/local/arm/3.4.2/bin/arm-unknown-linux-gnu-as STRIP=arm-linux-strip RANLIB=arm-linux-ranlib LD=arm-linux-ld   
-
-
-
-alias cd push cd
-
-
-
-/usr/local/arm-oabi-toolchain/arm-unknown-linux-gnu/bin/arm-unknown-linux-gnu-gcc

@@ -5,13 +5,6 @@
 ##### Author: Dário Nascimento										  #####
 ##### Date: 18 Feb 2013 										      #####
 ###########################################################################
-
-
-LOGIN:
-user: pi
-password: mit
-
-
 ########################## Wireless ######################################
 
 Os dongle USB de Wireless são RTL8188CUS da Realtek. Os drivers que existem de origem com o raspbian são incompletos por isso temos de compilar os drivers.
@@ -106,11 +99,6 @@ Todos os sensores recolhem dados e enviam para essa unidade por POST HTML. (usa 
 Para instalar o servidor:
 
 sudo apt-get install apache2  php5-mysql php5 mysql-server mysql-client mysql-common openjdk-6-jdk
-
-
-Base de dados:
-user: root
-password: mit
 
 
 

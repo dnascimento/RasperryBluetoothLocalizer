@@ -1,0 +1,11 @@
+insmod batman-adv.ko 
+ifconfig wlan0 mtu 1528
+iwconfig wlan0 mode ad-hoc essid batman channel 8
+
+batctl if add wlan0
+ifconfig wlan0 up
+ifconfig bat0 up
+
+ifconfig bat0 192.168.2.2/24
+
+
