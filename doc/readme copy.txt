@@ -111,7 +111,7 @@ CREATE USER 'mit'@'localhost' IDENTIFIED BY 'mit';
 
 GRANT ALL PRIVILEGES ON *.* TO 'mit'@'%'  WITH GRANT OPTION;
 
-mysql -umit -p mit < db.dump
+mysql -uroot -p mit < db.sql
 
 
 

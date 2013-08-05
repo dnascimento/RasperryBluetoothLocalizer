@@ -15,7 +15,7 @@ function Mobile(name,mac,ip,distance)
 }
 
 
-
+var mobileColorList = new Array();
 var mobileArray = new Array();
 p = Raphael(0,0,1000,600);	/**Raphael papper (x,y,width,height);*/
 var sensorsArray = new Array();
@@ -145,7 +145,7 @@ function updateMobiles(){
 		var mobileList = new Array();
 		
 		
-		var mobileColorList = new Array();
+		//var mobileColorList = new Array();
 		$("#mobile-distance-table").empty();
 		$("#mobile-distance-table").append("<tr><th>Mobile Name</th><th>MAC</th><th>Last Distance</th><th>Sensor</th><th>RSS</th><th>Last Detection</th></tr>");
 		
@@ -167,9 +167,11 @@ function updateMobiles(){
 			
 			var name = this['name'];
 			if(name == null){
-				name = "no name";
+				name = mac;
 			}
 			
+			//sacar a cor na bd
+
 			var color; 
 			if(mobileColorList[mac] == undefined){
 				mobileColorList[mac] = get_random_color();
@@ -295,9 +297,9 @@ function addMobile(sensor_ip,name,mac,x,y,distance,rss,timestamp,color,p){
 		})
 	
 	
-	mac = mac.substr(-9);
+	//mac = mac.substr(-9);
 	
-	var mobileMac =	p.text(side,y+20,mac)
+	var mobileMac =	p.text(side,y+20,name)
 	.attr({
 		"font-family":"Lucida Grande",
 		"font-size" : 0,
@@ -425,7 +427,7 @@ function addSensor(name,ip,x,y,p){
 	
 	
 	
-	var sensorIP =	p.text(x+8	,y+38,ip)
+	var sensorIP =	p.text(x+8	,y+38,"")
 	.attr({
 		"font-family":"Lucida Grande",
 		"font-size" : 0,
