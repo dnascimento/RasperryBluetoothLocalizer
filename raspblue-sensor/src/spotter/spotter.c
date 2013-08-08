@@ -171,6 +171,28 @@ void SensorResult(SensorData * data){
 }
 
 
+
+void free_elements(){
+    LElement * elem;
+    char * error;
+    void (* stop_cb)();
+    FOR_EACH(elem, plugins){
+        Plugin * p = (Plugin *)elem->data;
+        stop_cb = dlsym(p->handle, "stop_cb");
+        if ((error = dlerror()) != NULL) {
+            fprintf(stderr, "%s\n", error);
+            continue;
+        }
+        stop_cb();
+        dlclose(p->handle);
+    }
+    system("hciconfig hci0 reset");
+}
+
+
+
+
+
 void sig_handler(int signo)
 {
     if (signo == SIGINT){
@@ -214,40 +236,6 @@ void * sensor_loop(){
     return NULL;
 }
 
-void free_elements(){
-    LElement * elem;
-    char * error;
-    void (* stop_cb)();
-    FOR_EACH(elem, plugins){
-        Plugin * p = (Plugin *)elem->data;
-        stop_cb = dlsym(p->handle, "stop_cb");
-        if ((error = dlerror()) != NULL) {
-            fprintf(stderr, "%s\n", error);
-            continue;
-        }
-        stop_cb();
-        dlclose(p->handle);
-    }
-    FreeList(&plugins);
-    system("hciconfig hci0 reset");
-}
-
-void print_plugins(){
-    LElement * item;
-    char * type;
-    Plugin * plugin;
-    FOR_EACH(item, plugins){
-        plugin = (Plugin *) item->data;
-        switch(plugin->type){
-            case SYNC : type = "SYNC";
-                break;
-            case ASYNC : type = "ASYNC";
-                break;
-        }
-        printf("LOCATION: %s ; TYPE: %s\n", plugin->location, type);
-    }
-}
-
 
 int main(int argc, char ** argv) {
     
@@ -260,7 +248,6 @@ int main(int argc, char ** argv) {
     void * handle;
     void (*start_cb)();
     char * error;
-    int op = 0;
     LElement * item;
     char * spotter_file;
     
