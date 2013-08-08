@@ -1,5 +1,0 @@
-RasperryBluetoothLocalizer
-==========================
-
-Bluetooth Devices Distance
-
