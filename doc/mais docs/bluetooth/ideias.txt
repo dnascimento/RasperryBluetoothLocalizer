@@ -1,0 +1,19 @@
+o mapa deveria ser um mapa de bits e não uma matriz (questões de optimizar memória porque o mapa pode ser enorme e estamos a guardar poucos dados)
+Cuidado que para saber a posição seria mais difil pk só temos 2 simbolos
+
+
+O mapa poderia ser gerado apartir de uma imagem de um mapa real e assim depois de processada o mapa tinha compatibilidade com algo gráfico directamente (Traçar gráfico do percurso)
+
+Obrigar a que os mapas sejam introduzidos com uma determinada escala para que possamos dizer: sensor está na posição X e isso ser usado na triangulação de dados
+
+
+
+
+USO DE SONAR
+
+usar as antenas de telemovel para fazer localização
+
+
+
+
+
