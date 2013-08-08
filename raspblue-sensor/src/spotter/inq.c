@@ -661,7 +661,7 @@ static void fingerprint(){
 		finger_max[i++] = atoi(strtok(NULL, ","));
 	}
 
-	fclose(finger_file);
+	fclose(fp);
 
 	num_fingers = i;
 }

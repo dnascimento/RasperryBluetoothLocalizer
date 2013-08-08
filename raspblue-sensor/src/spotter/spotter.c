@@ -81,25 +81,6 @@ void sendDataToWebPrepare(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void sendDataToWebServer(char* sensorId,char* rss,char* mac){
     struct curl_httppost *formpost=NULL;
     struct curl_httppost *lastptr=NULL;
@@ -172,6 +153,32 @@ void SensorResult(SensorData * data){
 
 
 
+//Loop to adquire data
+void * sensor_loop(){
+    LElement * item;
+    Plugin * plugin;
+    void (* start_sense)();
+    int index = 1;
+    char * error;
+     
+    while(true){
+        index = 1;
+        FOR_EACH(item, plugins){
+            index++;
+            plugin = (Plugin *) item->data;
+            if (plugin->type == SYNC ){
+                start_sense = dlsym(plugin->handle, "start_sense");     //inq.c start_sense() //create new thread for this attempt
+                if ((error = dlerror()) != NULL) {
+                    fprintf(stderr, "%s\n", error);
+                }
+                start_sense();
+            }
+        }
+        sleep(SENSE_FREQUENCY); //5 secounds
+    }
+    return NULL;
+}
+
 void free_elements(){
     LElement * elem;
     char * error;
@@ -191,52 +198,6 @@ void free_elements(){
 
 
 
-
-
-void sig_handler(int signo)
-{
-    if (signo == SIGINT){
-        printf("received SIGINT\n");
-        free_elements();
-        exit(0);
-    }
-}
-
-
-
-
-
-
-//Loop to adquire data
-void * sensor_loop(){
-    LElement * item;
-    Plugin * plugin;
-    void (* start_sense)();
-    int index = 1;
-    char * error;
-    
-    if (signal(SIGINT, sig_handler) == SIG_ERR)
-        printf("\ncan't catch SIGINT\n");
-    // A long long wait so that we can easily issue a signal to this process    
-    while(true){
-        index = 1;
-        FOR_EACH(item, plugins){
-            index++;
-            plugin = (Plugin *) item->data;
-            if (plugin->type == SYNC ){
-                start_sense = dlsym(plugin->handle, "start_sense");     //inq.c start_sense() //create new thread for this attempt
-                if ((error = dlerror()) != NULL) {
-                    fprintf(stderr, "%s\n", error);
-                }
-                start_sense();
-            }
-        }
-        sleep(SENSE_FREQUENCY); //5 secounds
-    }
-    return NULL;
-}
-
-
 int main(int argc, char ** argv) {
     
     //LER CONFIGS E VER QUAIS OS PLUGINS QUE EXISTEM
@@ -248,6 +209,7 @@ int main(int argc, char ** argv) {
     void * handle;
     void (*start_cb)();
     char * error;
+    int op = 0;
     LElement * item;
     char * spotter_file;
     
