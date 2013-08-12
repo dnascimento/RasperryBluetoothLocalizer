@@ -212,6 +212,11 @@ int main(int argc, char ** argv) {
     int op = 0;
     LElement * item;
     char * spotter_file;
+
+    freopen("logout.txt","w",stdout);
+    freopen("logError.txt","w",stderr);
+
+
     
     if (argc != 3) {
         printf("USAGE: spotter <server_WSWebPage> <sensorId>\n");

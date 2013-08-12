@@ -434,6 +434,7 @@ static int inquisition(int dd, int length) {
 	//	hcitool cmd 03 0045 01				//Inquiry Result format with RSSI  (pag. 632 of specification)
 	if(hci_send_cmd(dd,OGF_HOST_CTL,OCF_WRITE_INQUIRY_MODE,WRITE_INQUIRY_MODE_CP_SIZE,inqmode)){	//TODO DARIO
 		perror(gettext("Cannot send command Inquiry Result format with RSSI!\n"));
+		system("reboot");
 		return EXIT_FAILURE;
 	}
 
@@ -443,6 +444,7 @@ static int inquisition(int dd, int length) {
 	//hcitool cmd 01 0003 0A 00 09 00 33 8b 9e 08 00
 	if (hci_send_cmd(dd, OGF_LINK_CTL, OCF_PERIODIC_INQUIRY, PERIODIC_INQUIRY_CP_SIZE, info) < 0) {
 		perror(gettext("Cannot request periodic inquiry!\n"));
+		system("reboot");
 		return EXIT_FAILURE;
 	}
 
