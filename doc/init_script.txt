@@ -1,0 +1,28 @@
+apt-get install upstart
+
+# mitservice - mitservice job file
+
+description "MIT bluetooth service"
+author "dario <dario.nascimento@ist.utl.pt>"
+
+# When to start the service
+start on (local-filesystems and net-device-up IFACE!=lo)
+
+# When to stop the service
+stop on runlevel [016]
+
+# Automatically restart process if crashed
+respawn
+
+console none
+
+# Essentially lets upstart know the process will detach itself to the background
+expect fork
+
+# Run before process
+pre-start script
+    [ -d /var/run/mitservice ] || mkdir -p /var/run/mitservice
+end script
+
+# Start the process
+exec run
