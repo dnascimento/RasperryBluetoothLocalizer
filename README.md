@@ -7,7 +7,7 @@ ex: Mobile1 is 4m from sensor1 then open the door.
 All sensors are connected via wireless.
 
 Centralized Architecture:
-==========================
+========
 Sensor (C and BlueZ):
 -> spotter.c -> Main program: Single threaded: Inq the mobiles bluetooth to get RSS value. POST this value to central server.
 
@@ -26,7 +26,7 @@ https://github.com/dnascimento/matlab_java_iSimplex
 This is just a introduction...
 
 How to Add a new sensor
-==========================
+=======
 - [x] Make a hard copy
 - [x] diskutil list
 - [x] diskutil unmountDisk /dev/disk******
