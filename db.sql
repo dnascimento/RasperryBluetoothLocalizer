@@ -87,7 +87,7 @@ CREATE TABLE `mobiles` (
 
 LOCK TABLES `mobiles` WRITE;
 /*!40000 ALTER TABLE `mobiles` DISABLE KEYS */;
-INSERT INTO `mobiles` VALUES ('dario','5C:96:9D:76:25:36');
+INSERT INTO `mobiles` VALUES ('new_mobile',''),('new_mobile','28:CC:01:C8:A7:C0'),('dario mac','5C:96:9D:76:25:36'),('DÃ¡rio Mobile','98:D6:F7:2E:18:48'),('new_mobile','9C:3A:AF:34:13:BE');
 /*!40000 ALTER TABLE `mobiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,8 +114,34 @@ CREATE TABLE `sensorData` (
 
 LOCK TABLES `sensorData` WRITE;
 /*!40000 ALTER TABLE `sensorData` DISABLE KEYS */;
-INSERT INTO `sensorData` VALUES (1,'5C:96:9D:76:25:36','2013-08-02 21:36:49',-68,1.3941158635037);
+INSERT INTO `sensorData` VALUES (1,'98:D6:F7:2E:18:48','2013-08-16 23:02:18',-86,6.2828981895681),(2,'98:D6:F7:2E:18:48','2013-08-16 23:02:12',-86,6.2828981895681),(3,'98:D6:F7:2E:18:48','2013-08-16 23:02:03',-61,1.2624051958362);
 /*!40000 ALTER TABLE `sensorData` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sensorDataAll`
+--
+
+DROP TABLE IF EXISTS `sensorDataAll`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sensorDataAll` (
+  `sensor_id` int(11) NOT NULL DEFAULT '0',
+  `mobile_mac` varchar(100) NOT NULL DEFAULT '',
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `rss` double DEFAULT NULL,
+  `distance` double DEFAULT NULL,
+  PRIMARY KEY (`sensor_id`,`mobile_mac`,`ts`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sensorDataAll`
+--
+
+LOCK TABLES `sensorDataAll` WRITE;
+/*!40000 ALTER TABLE `sensorDataAll` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sensorDataAll` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,7 +168,7 @@ CREATE TABLE `sensors` (
 
 LOCK TABLES `sensors` WRITE;
 /*!40000 ALTER TABLE `sensors` DISABLE KEYS */;
-INSERT INTO `sensors` VALUES (1,162,258,'00:15:83:52:42:92','10.0.0.1',0.5),(2,557,59,'00:02:72:AF:00:81','10.0.0.2',1),(3,681,512,'00:02:72:B0:D4:1C','10.0.0.3',1);
+INSERT INTO `sensors` VALUES (1,56,253,'00:15:83:52:42:92','192.168.20.37 TV',1),(2,737,555,'00:02:72:AF:00:81','192.168.20.17 Door',1),(3,624,60,'00:02:72:B0:D4:1C','192.168.20.68 Window',1);
 /*!40000 ALTER TABLE `sensors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +204,7 @@ CREATE TABLE `task_list` (
 
 LOCK TABLES `task_list` WRITE;
 /*!40000 ALTER TABLE `task_list` DISABLE KEYS */;
-INSERT INTO `task_list` VALUES (6,'Set',100,1,'lower',100,1,'5C:96:9D:76:25:36');
+INSERT INTO `task_list` VALUES (4,'Set',0,1,'lower',2,2,'98:D6:F7:2E:18:48'),(5,'Set',100,1,'bigger',2,2,'98:D6:F7:2E:18:48');
 /*!40000 ALTER TABLE `task_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-02 21:36:56
+-- Dump completed on 2013-08-17  0:02:24

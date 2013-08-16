@@ -209,7 +209,6 @@ int main(int argc, char ** argv) {
     void * handle;
     void (*start_cb)();
     char * error;
-    int op = 0;
     LElement * item;
     char * spotter_file;
 

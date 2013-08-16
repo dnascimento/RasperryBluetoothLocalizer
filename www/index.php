@@ -4,6 +4,7 @@
 <title>MIT Domotics - Bluetooth Control</title>
 <script src="jquery-1.8.2.min.js"></script>
 <script src="raphael-min.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet" type="text/css">
 <script> 
 function Mobile(name,mac,ip,distance)
 {
@@ -29,68 +30,98 @@ window.onload = function() {
 
 
 	//Rectangulo da sala	
-	p.rect(0,0,1000,600).attr({
-		fill: "#ffe589",  
-		stroke: "#4d4f54",
-		"stroke-width":20
+	p.image("wood.jpg",20,20,1000,570).attr({
+		fill: "#FAF9F6",  
+		stroke: "#e7e0d1",
+		"stroke-width":2
 	}).click(function(e){positionSensorsChange(e);});
 	
 		
 
-	//mesa do prof
-	p.rect(10,200,100,200).attr({
+	//mesa TV
+	p.rect(20,245,40,120).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 
 		
 		
 	//lateral
-	p.rect(180,10,180,100).attr({
-		fill: "white",
+	p.rect(200,20,120,60).attr({
+		fill: "wood.png",
 	}).click(function(e){positionSensorsChange(e);});
 
 	
-	p.rect(450,10,180,100).attr({
+	p.rect(400,20,120,60).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 
 
-	p.rect(700,10,180,100).attr({
+	p.rect(520,20,120,60).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 
+	p.rect(670,20,60,120).attr({
+		fill: "white",
+	}).click(function(e){positionSensorsChange(e);});
 
-
-	//lateral
+	//lateral porta
 		
-	p.rect(410,450,100,140).attr({
+	p.rect(730,550,120,40).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 
 
-	p.rect(640,450,100,140).attr({
+	p.rect(610,470,60,120).attr({
+		fill: "white",
+	}).click(function(e){positionSensorsChange(e);});
+	
+	p.rect(550,470,60,120).attr({
+		fill: "white",
+	}).click(function(e){positionSensorsChange(e);});
+
+	p.rect(550,410,120,60).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 
 
-	//Fundo da sala
-	p.rect(980,130,10,400).attr({
+	p.rect(390,550,120,40).attr({
+		fill: "#8e8e8e",
+	}).click(function(e){positionSensorsChange(e);});
+
+
+	p.rect(320,470,60,120).attr({
+		fill: "white",
+	}).click(function(e){positionSensorsChange(e);});
+	
+	p.rect(320,350,60,120).attr({
+		fill: "white",
+	}).click(function(e){positionSensorsChange(e);});
+	
+	//Shelf
+	p.rect(20,550,120,40).attr({
+		fill: "#8e8e8e",
+	}).click(function(e){positionSensorsChange(e);});
+
+	//quadro
+	p.rect(990,180,10,200).attr({
 		fill: "white",
 	}).click(function(e){positionSensorsChange(e);});
 	
 	
-		p.text(500,150,"MIT Room")
+		p.text(500,250,"MIT Portugal - 1.58")
 		.attr({
-			"font-family":"Lucida Grande",
-			"font-size" : 20
+			"font-family":'Lobster Two', 
+			"font-size" : 40,
+			fill: '#dadada',
+			'fill-opacity': 0.8
 		});
 
 	
 	//Porta
-	p.path("M900 600, c0 -50 0 -40 40 0")
+	p.path("M900 590, c0 -40 0 -40 40 2")
 		.attr({
-				fill: "#4d4f54",
-				stroke: "#4d4f54",
+				fill: "#8e8e8e",
+				stroke: "#8e8e8e", 
 				"stroke-width":20
 		});
 	var periodic = setInterval(function(){updateMobiles()},5000);
@@ -143,6 +174,7 @@ function updateMobiles(){
 		deleteMobiles();
 		
 		var mobileList = new Array();
+		
 		
 		
 		//var mobileColorList = new Array();
@@ -277,7 +309,7 @@ function addMobile(sensor_ip,name,mac,x,y,distance,rss,timestamp,color,p){
 	
 	x = sensor.x+10;
 	y = sensor.y+10;
-	raio = distance * 10;
+	raio = distance * 100;
 	
 	var randomLocation = Math.random();
 	var side;
@@ -470,7 +502,7 @@ function get_random_color() {
 </script>
 <style type="text/css">
 body{
-	background-color: #f1f1f1;
+	background-color: #f5f2ec;
 	font-family: "Lucida Grande";
 }
 h1,h2,h3,h4,p{

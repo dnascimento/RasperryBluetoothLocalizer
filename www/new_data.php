@@ -25,12 +25,22 @@ $sql_result = mysql_query($sql_query,$link);
 while($row = mysql_fetch_assoc($sql_result)){
 	$correction_factor = $row['correction_factor'];
 }
+	//y = 8E-09x4.534
 
-
-	$distance =  pow(10, ($rss + 57.37) / (-23.87))*$correction_factor;
-
+	//$distance =  pow(8, ($rss*-0.00000004534))*$correction_factor;
+	$distance =  pow(10, ($rss + 57.37) / (-35.87))*$correction_factor;
 
 $sql_query = "insert into sensorData(sensor_id,rss,mobile_mac,distance) values($sensorId,$rss,'$macAddress','$distance') ON DUPLICATE KEY UPDATE rss=$rss, ts=CURRENT_TIMESTAMP;";
+
+
+//$sql_query = "insert into sensorDataAll(sensor_id,rss,mobile_mac,distance,ts) values($sensorId,$rss,'$macAddress','$distance',CURRENT_TIMESTAMP);";
+
+
+
+
+
+
+
 
 //echo $sql_query;
 
