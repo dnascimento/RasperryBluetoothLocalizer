@@ -1,4 +1,4 @@
-RasperryBluetoothLocalizer
+Rasperry Bluetooth Localizer
 ==========================
 
 Bluetooth Devices Location and Domotic Action:
